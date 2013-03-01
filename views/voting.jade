@@ -1,0 +1,77 @@
+extends layout
+
+block head
+	style(type='text/css')
+		#users {
+			margin-top: 20px;
+		}
+		.user {
+			text-align: center;
+		}
+		.user_vote {
+			font-size: 42px;
+			padding: 20px;
+		}
+
+	script(type='text/javascript')
+		var socket = io.connect('http://192.168.20.102:3000');
+		
+		$(document).ready(function() {
+			$('#vote').click(function() {
+				var vote = prompt('Seu voto?');
+				socket.emit('vote', {room: '#{room.name}', user: name, vote: vote});
+			});
+
+			$('#toggle_votes').click(function() {
+				$('.user_vote').toggle();
+			});
+
+			$('#clear_votes').click(function() {
+				$('.user_vote').hide();
+				socket.emit('clear_votes', {room: '#{room.name}'});
+			});
+		});
+
+		function add_users(room) {
+			$('#users').empty();
+			var disable_show_votes = false;
+			for (var user in room.users) {
+				if (room.users[user].vote === null) disable_show_votes = true;
+				
+				var cssclass = room.users[user].vote === null ? 'alert-error' : 'alert-success';
+				var vote = room.users[user].vote === null ? 'não votou' : room.users[user].vote;
+				var div_vote = '<div id="'+ user +'_vote" class="user_vote" style="display:none;">' + vote + '</div>';
+				$('#users').append('<div class="span4 user"><div class="alert ' + cssclass + '" id="'+ user +'">' + user + div_vote + '</div></div>');
+			}
+			if (disable_show_votes) {
+				$('#toggle_votes').attr('disabled', 'disabled');
+			} else {
+				$('#toggle_votes').removeAttr('disabled');
+			}
+		}
+
+		function set_vote(user) {
+			$('#' + user.name + '_vote').text(user.vote);
+			$('#' + user.name).removeClass('alert-error');
+			$('#' + user.name).addClass('alert-success');
+		}
+
+		// enter the room
+		var name = prompt('Seu nome?');
+		if (name !== null) {
+			socket.emit('enter', {room: '#{room.name}', name: name});
+			socket.on('info', function(data) {
+				add_users(data.room);
+			});
+		}
+
+block content
+	h1= title
+	
+	hr
+	p
+		button#vote(class='btn btn-success') Votar
+		button#toggle_votes(class='btn btn-info') Mostrar/Esconder Pontos
+		button#clear_votes(class='btn btn-warning') Limpar Pontos
+	
+	#users.row
