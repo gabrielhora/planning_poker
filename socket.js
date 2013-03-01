@@ -8,7 +8,7 @@ module.exports = function(app, io) {
 
 	io.sockets.on('connection', function(socket) {
 		socket.on('enter', function(data) {
-			if (data !== null && data.name !== null) {
+			if (data.name !== null && data.name !== '') {
 				manager.addUserToRoom(data.room, data.name);
 			}
 			broadcast_info(socket, data.room);

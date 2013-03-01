@@ -31,9 +31,6 @@ app.configure('development', function() {
 	app.use(express.errorHandler());
 });
 
-// cria umas salas padrão
-manager.addRoom('picpay');
-
 // configura as rotas e os endpoints
 require('./routes/room')(app, io);
 require('./socket')(app, io);

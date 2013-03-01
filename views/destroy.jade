@@ -1,0 +1,10 @@
+extends layout
+
+block content
+	h1= title
+	hr
+
+	p Excluir #{room.name}?
+
+	form(method='post', action='/#{room.name}/destroy')
+		button(type='submit', class='btn btn-danger') Excluir

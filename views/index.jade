@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1= title
+	hr
+
+	ul
+		- manager.forEachRoom(function(room) {
+			li
+				a(href='/' + room.name)= room.name
+		- })

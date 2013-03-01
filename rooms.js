@@ -13,33 +13,41 @@ RoomManager.prototype.getRoom = function(name) {
 	return null;
 }
 
-RoomManager.prototype.setVote = function(room, user, vote) {
-	var room = this.getRoom(room);
+RoomManager.prototype.setVote = function(name, user, vote) {
+	var room = this.getRoom(name);
 	if (room) {
 		room.users[user].vote = vote;
 	}
 	return room;
 }
 
-RoomManager.prototype.allVoted = function(room) {
-	var room = this.getRoom(room);
-	if (room) {
-		for (var user in room.users) {
-			if (room.users[user].vote === null) return false;
-		}
-		return true;
-	}
-	return false;
-}
-
-RoomManager.prototype.clearVotes = function(room) {
-	var room = this.getRoom(room);
+RoomManager.prototype.clearVotes = function(name) {
+	var room = this.getRoom(name);
 	if (room) {
 		for (var user in room.users) {
 			room.users[user].vote = null;
 		}
+		return room;
 	}
-	return room;
+	return null;
+}
+
+RoomManager.prototype.destroyRoom = function(name) {
+	var room = this.getRoom(name);
+	if (room) {
+		delete this.rooms[room.name];
+		return room;
+	}
+	return null;
+}
+
+RoomManager.prototype.clearRoom = function(name) {
+	var room = this.getRoom(name);
+	if (room) {
+		room.users = {};
+		return room;
+	}
+	return null;
 }
 
 RoomManager.prototype.addRoom = function(name) {

@@ -14,6 +14,7 @@ block head
 		}
 
 	script(type='text/javascript')
+		var name = prompt('Seu nome?');
 		var socket = io.connect('http://192.168.20.102:3000');
 		
 		$(document).ready(function() {
@@ -23,7 +24,7 @@ block head
 			});
 
 			$('#toggle_votes').click(function() {
-				$('.user_vote').toggle();
+				$('.user_vote').show();
 			});
 
 			$('#clear_votes').click(function() {
@@ -57,7 +58,6 @@ block head
 		}
 
 		// enter the room
-		var name = prompt('Seu nome?');
 		if (name !== null) {
 			socket.emit('enter', {room: '#{room.name}', name: name});
 			socket.on('info', function(data) {
@@ -67,11 +67,14 @@ block head
 
 block content
 	h1= title
+	a(href='/') home
+	, 
+	a(href='/#{room.name}/destroy') excluir
 	
 	hr
 	p
 		button#vote(class='btn btn-success') Votar
-		button#toggle_votes(class='btn btn-info') Mostrar/Esconder Pontos
+		button#toggle_votes(class='btn btn-info') Mostrar Pontos
 		button#clear_votes(class='btn btn-warning') Limpar Pontos
 	
 	#users.row
