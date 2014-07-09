@@ -1,7 +1,7 @@
 extends layout
 
 block head
-	style(type='text/css')
+	style.
 		#users {
 			margin-top: 20px;
 		}
@@ -13,9 +13,9 @@ block head
 			padding: 20px;
 		}
 
-	script(type='text/javascript')
+	script.
 		var name = prompt('Seu nome?');
-		var socket = io.connect('http://192.168.20.102:3000');
+		var socket = io.connect('http://localhost:3000');
 		
 		$(document).ready(function() {
 			$('#vote').click(function() {
