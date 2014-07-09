@@ -1,7 +1,7 @@
 planning poker
 ==============
 
-Little experiment with [http://socket.io/](socket.io) for a toy planning poker app.
+Little experiment with [socket.io](http://socket.io/) for a toy planning poker app.
 
 ---
 
