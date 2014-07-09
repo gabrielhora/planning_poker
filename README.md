@@ -1,4 +1,5 @@
-#### planning poker
+planning poker
+==============
 
 Little experiment with [http://socket.io/](socket.io) for a toy planning poker app.
 
