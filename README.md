@@ -5,8 +5,8 @@ Little experiment with [http://socket.io/](socket.io) for a toy planning poker a
 
 ---
 
-![Screenshot1](https://github.com/gabrielhora/planning_poker/blob/master/Screenshot1.png "Screenshot 1")
+![Screenshot1](https://raw.githubusercontent.com/gabrielhora/planning_poker/master/Screenshot1.png "Screenshot 1")
 
 ---
 
-![Screenshot2](https://github.com/gabrielhora/planning_poker/blob/master/Screenshot2.png "Screenshot 2")
+![Screenshot2](https://raw.githubusercontent.com/gabrielhora/planning_poker/master/Screenshot2.png "Screenshot 2")
